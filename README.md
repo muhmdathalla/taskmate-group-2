@@ -11,7 +11,7 @@ Proyek ini dikerjakan oleh **Kelompok 2** yang terdiri dari 3 anggota:
 
 | No | Nama Anggota | Peran Utama | Fokus Tanggung Jawab & Modul |
 |---|---|---|---|
-| 1 | **Muhammad Athalla** | **Team Lead & Core State / Integrasi** | • Inisialisasi arsitektur proyek (Vite + React)<br>• Manajemen *Global State* di `App.jsx`<br>• Logika sinkronisasi & *persistence* `localStorage`<br>• Komponen Ringkasan (*Summary Dashboard*) statistik tugas<br>• Integrasi antarkomponen & *Responsive Layout Shell* |
+| 1 | **Muhammad Athalla** | **Core State / Integrasi** | • Inisialisasi arsitektur proyek (Vite + React)<br>• Manajemen *Global State* di `App.jsx`<br>• Logika sinkronisasi & *persistence* `localStorage`<br>• Komponen Ringkasan (*Summary Dashboard*) statistik tugas<br>• Integrasi antarkomponen & *Responsive Layout Shell* |
 | 2 | **Ridho Satrio** | **Form & Input Handler Specialist** | • Komponen `TaskForm.jsx`<br>• Alur tambah tugas baru (*Create*) & mode edit tugas (*Update*)<br>• Validasi ketat (judul, matkul, tenggat wajib, penanganan input spasi kosong)<br>• Fitur pembatalan edit (*Cancel edit*) & reset form<br>• Pengujian alur input formulir |
 | 3 | **Rifani Juniarti** | **List, Card & Interaction Specialist** | • Komponen `TaskList.jsx` dan `TaskItem.jsx`<br>• Komponen filter & pencarian (`FilterBar.jsx`)<br>• Interaktivitas tugas: toggle status (Belum Selesai / Selesai)<br>• Modal / dialog konfirmasi hapus tugas (*Delete*)<br>• *Empty State UI* (petunjuk saat daftar tugas kosong/tidak ditemukan) |
 
