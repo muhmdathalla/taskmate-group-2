@@ -1,0 +1,157 @@
+import React from 'react'
+
+/**
+ * ============================================================================
+ * MODUL KARTU TUGAS (TANGGUNG JAWAB: RIFANI JUNIARTI)
+ * ============================================================================
+ * Halo Rifani! File ini menampilkan satu item/kartu tugas di dalam daftar.
+ * 
+ * PROPS YANG DITERIMA:
+ * - task           : Object tugas { id, title, course, deadline, notes, completed }
+ * - onToggleStatus : Fungsi untuk mengubah status tugas (selesai / belum selesai)
+ * - onEdit         : Fungsi untuk memulai edit tugas
+ * - onRequestDelete: Fungsi untuk membuka modal konfirmasi hapus tugas
+ * ============================================================================
+ */
+
+export default function TaskItem({
+  task,
+  onToggleStatus,
+  onEdit,
+  onRequestDelete,
+}) {
+  if (!task) return null
+
+  const isCompleted = Boolean(task.completed)
+
+  return (
+    <div
+      style={{
+        backgroundColor: 'var(--bg-surface)',
+        border: '1px solid var(--border-color)',
+        borderRadius: 'var(--radius-md)',
+        padding: '1rem',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '0.65rem',
+        transition: 'all 0.2s ease',
+        opacity: isCompleted ? 0.75 : 1,
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem' }}>
+        {/* Tombol Checkbox Status */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', flex: 1 }}>
+          <button
+            type="button"
+            onClick={() => onToggleStatus && onToggleStatus(task.id)}
+            aria-label={isCompleted ? 'Tandai belum selesai' : 'Tandai selesai'}
+            style={{
+              marginTop: '0.2rem',
+              width: '1.25rem',
+              height: '1.25rem',
+              borderRadius: '4px',
+              border: `2px solid ${isCompleted ? 'var(--color-completed)' : 'var(--border-color)'}`,
+              background: isCompleted ? 'var(--color-completed)' : 'transparent',
+              color: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '0.75rem',
+              fontWeight: 800,
+              flexShrink: 0,
+            }}
+          >
+            {isCompleted ? '✓' : ''}
+          </button>
+
+          <div>
+            <h3
+              style={{
+                fontSize: '1rem',
+                fontWeight: 600,
+                color: 'var(--text-main)',
+                textDecoration: isCompleted ? 'line-through' : 'none',
+              }}
+            >
+              {task.title}
+            </h3>
+            <span
+              style={{
+                display: 'inline-block',
+                marginTop: '0.25rem',
+                padding: '0.15rem 0.5rem',
+                borderRadius: 'var(--radius-full)',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                background: 'var(--bg-surface-soft)',
+                color: 'var(--text-muted)',
+                border: '1px solid var(--border-color)',
+              }}
+            >
+              📚 {task.course}
+            </span>
+          </div>
+        </div>
+
+        {/* Badge Status */}
+        <span
+          style={{
+            padding: '0.2rem 0.6rem',
+            borderRadius: 'var(--radius-full)',
+            fontSize: '0.75rem',
+            fontWeight: 700,
+            backgroundColor: isCompleted ? 'var(--color-completed-soft)' : 'var(--color-pending-soft)',
+            color: isCompleted ? 'var(--color-completed)' : 'var(--color-pending)',
+            flexShrink: 0,
+          }}
+        >
+          {isCompleted ? 'Selesai' : 'Belum Selesai'}
+        </span>
+      </div>
+
+      {/* Info Tenggat & Catatan */}
+      <div style={{ fontSize: '0.825rem', color: 'var(--text-muted)' }}>
+        <p>⏰ Tenggat: {task.deadline || '-'}</p>
+        {task.notes && (
+          <p style={{ marginTop: '0.25rem', color: 'var(--text-subtle)', fontStyle: 'italic' }}>
+            📝 {task.notes}
+          </p>
+        )}
+      </div>
+
+      {/* Tombol Aksi: Edit & Hapus */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginTop: '0.25rem' }}>
+        <button
+          type="button"
+          onClick={() => onEdit && onEdit(task)}
+          style={{
+            padding: '0.35rem 0.65rem',
+            borderRadius: 'var(--radius-sm)',
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            background: 'var(--bg-surface-soft)',
+            color: 'var(--text-main)',
+            border: '1px solid var(--border-color)',
+          }}
+        >
+          ✏️ Edit
+        </button>
+
+        <button
+          type="button"
+          onClick={() => onRequestDelete && onRequestDelete(task)}
+          style={{
+            padding: '0.35rem 0.65rem',
+            borderRadius: 'var(--radius-sm)',
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            background: 'var(--color-danger-soft)',
+            color: 'var(--color-danger)',
+          }}
+        >
+          🗑️ Hapus
+        </button>
+      </div>
+    </div>
+  )
+}
