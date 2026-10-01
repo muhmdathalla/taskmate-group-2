@@ -1,18 +1,14 @@
 import React from 'react'
 
-/**
- * ============================================================================
- * MODUL KARTU TUGAS (TANGGUNG JAWAB: RIFANI JUNIARTI)
- * ============================================================================
- * Halo Rifani! File ini menampilkan satu item/kartu tugas di dalam daftar.
- * 
- * PROPS YANG DITERIMA:
- * - task           : Object tugas { id, title, course, deadline, notes, completed }
- * - onToggleStatus : Fungsi untuk mengubah status tugas (selesai / belum selesai)
- * - onEdit         : Fungsi untuk memulai edit tugas
- * - onRequestDelete: Fungsi untuk membuka modal konfirmasi hapus tugas
- * ============================================================================
- */
+// Halo Fani! Ini komponen buat nampilin satu kartu tugas (item).
+//
+// Props dari TaskList / App.jsx:
+// - task           : object datanya { id, title, course, deadline, notes, completed }
+// - onToggleStatus : buat ubah status selesai / belum selesai
+// - onEdit         : buat nge-trigger mode edit (ngirim data tugas ke form Ridho)
+// - onRequestDelete: buat manggil popup konfirmasi hapus
+//
+// Style-nya udah gw bikin rapi, tapi kalau lu mau adjust card-nya silakan bangett yaa!
 
 export default function TaskItem({
   task,
@@ -39,7 +35,7 @@ export default function TaskItem({
       }}
     >
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem' }}>
-        {/* Tombol Checkbox Status */}
+        {/* Tombol Checklist Status */}
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', flex: 1 }}>
           <button
             type="button"
@@ -93,7 +89,7 @@ export default function TaskItem({
           </div>
         </div>
 
-        {/* Badge Status */}
+        {/* Badge status */}
         <span
           style={{
             padding: '0.2rem 0.6rem',
@@ -109,7 +105,7 @@ export default function TaskItem({
         </span>
       </div>
 
-      {/* Info Tenggat & Catatan */}
+      {/* Info deadline & catatan */}
       <div style={{ fontSize: '0.825rem', color: 'var(--text-muted)' }}>
         <p>⏰ Tenggat: {task.deadline || '-'}</p>
         {task.notes && (
@@ -119,7 +115,7 @@ export default function TaskItem({
         )}
       </div>
 
-      {/* Tombol Aksi: Edit & Hapus */}
+      {/* Tombol aksi: Edit & Hapus */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginTop: '0.25rem' }}>
         <button
           type="button"

@@ -1,25 +1,18 @@
 import React, { useState, useEffect } from 'react'
 
-/**
- * ============================================================================
- * MODUL FORM TUGAS (TANGGUNG JAWAB: RIDHO SATRIO)
- * ============================================================================
- * Halo Ridho! File ini adalah template untuk fitur Form Tugas.
- * Kamu bertugas mengelola alur Tambah Tugas, Edit Tugas, dan Validasi Input.
- * 
- * PROPS YANG DITERIMA DARI App.jsx:
- * - onAddTask(taskData)      : Fungsi untuk menyimpan tugas baru ke state utama
- * - editingTask              : Object tugas yang sedang diedit (null jika mode tambah)
- * - onUpdateTask(updatedTask): Fungsi untuk menyimpan perubahan data tugas yang diedit
- * - onCancelEdit()           : Fungsi untuk membatalkan mode edit dan kembali ke mode tambah
- * 
- * ATURAN VALIDASI SESUAI SPESIFIKASI ITC:
- * 1. Judul Tugas (Wajib): Tidak boleh kosong atau cuma berisi spasi (.trim() === '')
- * 2. Mata Kuliah (Wajib): Tidak boleh kosong atau cuma berisi spasi
- * 3. Tenggat Waktu (Wajib): Harus memilih tanggal/waktu yang valid
- * 4. Catatan (Opsional): Boleh diisi atau dikosongkan
- * ============================================================================
- */
+// Halo Dho! Ini file buat bagian form input & edit tugas yaa.
+// Struktur dasarnya udah gw siapin, nnti lu tinggal poles logic / styling-nya kalau mau diubah lagi.
+//
+// Props yang udah gw sediain dari App.jsx:
+// - onAddTask(data)        : buat nge-save tugas baru ke state & localStorage
+// - editingTask            : data tugas yg lagi di-edit (isinya null kalau lagi mode nambah tugas biasa)
+// - onUpdateTask(dataBaru) : buat simpen hasil editan
+// - onCancelEdit()         : buat batalin edit & balikin form ke mode nambah
+//
+// Catatan dari slide ITC:
+// 1. Judul, matkul, sama tenggat (deadline) itu wajib diisi yaa.
+// 2. Awasin inputan yg cuma spasi doang (pake .trim()).
+// 3. Catatan sifatnya opsional (boleh kosong).
 
 export default function TaskForm({
   onAddTask,
@@ -27,14 +20,13 @@ export default function TaskForm({
   onUpdateTask,
   onCancelEdit,
 }) {
-  // State form lokal
   const [title, setTitle] = useState('')
   const [course, setCourse] = useState('')
   const [deadline, setDeadline] = useState('')
   const [notes, setNotes] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
 
-  // Efek ketika mode edit aktif (mengisi form dengan data yang dipilih)
+  // Pas tombol edit diklik di daftar tugas, otomatis ngisi inputan form pake data lama
   useEffect(() => {
     if (editingTask) {
       setTitle(editingTask.title || '')
@@ -55,13 +47,13 @@ export default function TaskForm({
     setErrorMessage('')
   }
 
-  // TODO [Ridho]: Lengkapi / sempurnakan logika validasi & pengiriman data
+  // Handle submit form (tambah baru atau update hasil edit)
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    // 1. Validasi input wajib & spasi kosong
+    // Validasi sederhana: jangan bolehin kosong atau cuma spasi doang
     if (!title.trim() || !course.trim() || !deadline) {
-      setErrorMessage('Judul, mata kuliah, dan tenggat wajib diisi!')
+      setErrorMessage('Judul, mata kuliah, dan tenggat wajib diisi ya!')
       return
     }
 
@@ -73,12 +65,10 @@ export default function TaskForm({
     }
 
     if (editingTask) {
-      // Mode Edit
       if (onUpdateTask) {
         onUpdateTask({ ...editingTask, ...payload })
       }
     } else {
-      // Mode Tambah Baru
       if (onAddTask) {
         onAddTask({
           id: `task-${Date.now()}`,
@@ -109,7 +99,7 @@ export default function TaskForm({
         </div>
       )}
 
-      {/* TODO [Ridho]: Sesuaikan atau percantik styling form ini sesuai kebutuhan */}
+      {/* Dho, form-nya udah bisa dipake langsung, tapi kalau mau dipercantik atau diatur lagi feel free ya! */}
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
         <div>
           <label style={{ display: 'block', fontSize: '0.85rem', marginBottom: '0.35rem', color: 'var(--text-muted)' }}>
@@ -176,7 +166,7 @@ export default function TaskForm({
           </label>
           <textarea
             rows="3"
-            placeholder="Tambahkan detail, link referensi, dll."
+            placeholder="Catatan kecil / link referensi..."
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             style={{

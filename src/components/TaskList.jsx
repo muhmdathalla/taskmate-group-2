@@ -1,23 +1,13 @@
 import React from 'react'
 import TaskItem from './TaskItem'
 
-/**
- * ============================================================================
- * MODUL DAFTAR TUGAS (TANGGUNG JAWAB: RIFANI JUNIARTI)
- * ============================================================================
- * Halo Rifani! File ini menampilkan seluruh daftar kartu tugas (TaskList).
- * 
- * PROPS YANG DITERIMA:
- * - tasks          : Array list tugas yang sudah difilter/dicari
- * - totalTasksCount: Jumlah total tugas sebelum filter (untuk deteksi empty state)
- * - onToggleStatus : Diteruskan ke TaskItem
- * - onEdit         : Diteruskan ke TaskItem
- * - onRequestDelete: Diteruskan ke TaskItem
- * 
- * ATURAN SPESIFIKASI ITC:
- * - Tampilkan petunjuk ramah saat data tugas masih kosong
- * ============================================================================
- */
+// Halo Fani! Ini komponen utama buat nampilin list seluruh tugas (TaskList).
+// Di sini juga udah ada handling buat Empty State (kondisi pas datanya kosong).
+//
+// Props dari App.jsx:
+// - tasks          : array list tugas yg udah difilter/dicari
+// - totalTasksCount: total semua tugas sebelum difilter (buat bedain empty state awal vs ga ketemu pas dicari)
+// - onToggleStatus, onEdit, onRequestDelete : diterusin ke TaskItem yaa
 
 export default function TaskList({
   tasks = [],
@@ -26,7 +16,7 @@ export default function TaskList({
   onEdit,
   onRequestDelete,
 }) {
-  // Empty State: Ketika belum ada tugas sama sekali
+  // Empty state 1: Kalau user emang belum pernah nambah tugas sama sekali
   if (totalTasksCount === 0) {
     return (
       <div className="surface-card" style={{ textAlign: 'center', padding: '3rem 1.5rem' }}>
@@ -35,13 +25,13 @@ export default function TaskList({
           Belum Ada Tugas Kuliah
         </h3>
         <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-          Gunakan formulir di samping untuk menambahkan tugas kuliah pertamamu!
+          Yuk catat tugas kuliah pertamamu lewat form di samping!
         </p>
       </div>
     )
   }
 
-  // Empty State: Ketika pencarian / filter tidak menemukan hasil
+  // Empty state 2: Pas user ngetik pencarian atau filter status tapi ga ada yang cocok
   if (tasks.length === 0) {
     return (
       <div className="surface-card" style={{ textAlign: 'center', padding: '3rem 1.5rem' }}>
@@ -50,12 +40,13 @@ export default function TaskList({
           Tugas Tidak Ditemukan
         </h3>
         <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-          Tidak ada tugas yang cocok dengan kata kunci pencarian atau filter status yang dipilih.
+          Coba cek kata kunci pencarian atau ubah filter statusnya ya.
         </p>
       </div>
     )
   }
 
+  // Kalau datanya ada, tinggal di-render satu per satu lewat TaskItem
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
       {tasks.map((task) => (

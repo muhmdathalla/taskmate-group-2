@@ -1,22 +1,15 @@
 import React from 'react'
 
-/**
- * ============================================================================
- * MODUL PENCARIAN & FILTER (TANGGUNG JAWAB: RIFANI JUNIARTI)
- * ============================================================================
- * Halo Rifani! File ini adalah komponen bilah pencarian & filter status.
- * 
- * PROPS YANG DITERIMA:
- * - searchQuery        : String teks pencarian saat ini
- * - onSearchChange     : Fungsi callback saat input teks pencarian berubah
- * - statusFilter       : Nilai filter saat ini ('all', 'pending', 'completed')
- * - onStatusFilterChange: Fungsi callback saat tombol filter status ditekan
- * 
- * ATURAN SPESIFIKASI ITC:
- * 1. Pencarian judul tidak membedakan huruf kapital/kecil (case-insensitive)
- * 2. Filter: "Semua", "Belum Selesai", dan "Selesai"
- * ============================================================================
- */
+// Halo Fani! Ini komponen buat search bar sama filter status tugas yaa.
+//
+// Props dari App.jsx:
+// - searchQuery         : teks yg lagi diketik user buat nyari judul
+// - onSearchChange      : fungsi biar teks pencarian di App.jsx ikut update
+// - statusFilter        : tab filter aktif ('all', 'pending', atau 'completed')
+// - onStatusFilterChange : fungsi pas tombol filter status diklik
+//
+// Sesuai slide: pencarian judul tugas case-insensitive (ga bedain huruf besar/kecil).
+// Logika filternya udah jalan di App.jsx, di sini tinggal urus UI & interaksinya ya!
 
 export default function FilterBar({
   searchQuery = '',
@@ -26,7 +19,7 @@ export default function FilterBar({
 }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.25rem' }}>
-      {/* Input Pencarian */}
+      {/* Kolom Pencarian */}
       <div>
         <input
           type="text"
@@ -44,7 +37,7 @@ export default function FilterBar({
         />
       </div>
 
-      {/* Tombol Filter Status */}
+      {/* Pilihan Filter Status */}
       <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
         {[
           { key: 'all', label: 'Semua' },
