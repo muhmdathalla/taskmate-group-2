@@ -1,14 +1,8 @@
 import React from 'react'
 import TaskItem from './TaskItem'
+import { TaskListIcon, SearchIcon } from './Icons'
 
-// Halo Fani! Ini komponen utama buat nampilin list seluruh tugas (TaskList).
-// Di sini juga udah ada handling buat Empty State (kondisi pas datanya kosong).
-//
-// Props dari App.jsx:
-// - tasks          : array list tugas yg udah difilter/dicari
-// - totalTasksCount: total semua tugas sebelum difilter (buat bedain empty state awal vs ga ketemu pas dicari)
-// - onToggleStatus, onEdit, onRequestDelete : diterusin ke TaskItem yaa
-
+// Modul Daftar Tugas (Implementasi oleh Rifani Juniarti)
 export default function TaskList({
   tasks = [],
   totalTasksCount = 0,
@@ -19,67 +13,55 @@ export default function TaskList({
   onResetFilters,
   editingTask,
 }) {
-  // Empty state 1: Kalau user emang belum pernah nambah tugas sama sekali
+  // Empty state 1: Ketika belum ada tugas sama sekali
   if (totalTasksCount === 0) {
     return (
-      <div className="surface-card" role="status" style={{ textAlign: 'center', padding: '3rem 1.5rem' }}>
-        <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>📋</div>
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.35rem', color: 'var(--text-main)' }}>
+      <div className="empty-state-card" role="status">
+        <div className="empty-state-icon" aria-hidden="true">
+          <TaskListIcon size={24} />
+        </div>
+        <h3 className="empty-state-title">
           Belum Ada Tugas Kuliah
         </h3>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-          <span className="desktop-text">
-            Yuk catat tugas kuliah pertamamu lewat form di samping!
-          </span>
-          <span className="mobile-text">
-            Yuk catat tugas kuliah pertamamu lewat form di atas!
-          </span>
+        <p className="empty-state-desc">
+          Mulai catat tugas kuliah pertamamu melalui formulir yang tersedia.
         </p>
       </div>
     )
   }
 
-  // Empty state 2: Pas user ngetik pencarian atau filter status tapi ga ada yang cocok
+  // Empty state 2: Ketika pencarian / filter tidak menemukan hasil
   if (tasks.length === 0) {
     const keyword = searchQuery.trim()
     return (
-      <div className="surface-card" style={{ textAlign: 'center', padding: '3rem 1.5rem' }}>
-        <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }} aria-hidden="true">🔍</div>
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.35rem', color: 'var(--text-main)' }}>
+      <div className="empty-state-card" role="status">
+        <div className="empty-state-icon" aria-hidden="true">
+          <SearchIcon size={24} />
+        </div>
+        <h3 className="empty-state-title">
           Tugas Tidak Ditemukan
         </h3>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+        <p className="empty-state-desc">
           {keyword
             ? `Tidak ada tugas dengan judul "${keyword}" pada filter ini.`
-            : 'Tidak ada tugas dengan status ini.'}
-            {' '}
-          Coba cek kata kunci pencarian atau ubah filter statusnya ya.
+            : 'Tidak ada tugas yang sesuai dengan filter status yang dipilih.'}
         </p>
 
         {onResetFilters && (
           <button
             type="button"
+            className="empty-state-btn"
             onClick={onResetFilters}
-            style={{
-              padding: '0.5rem 1rem',
-              marginTop: '1rem',
-              borderRadius: 'var(--radius-md)',
-              background: 'var(--color-primary)',
-              color: '#ffffff',
-              fontWeight: 600,
-              fontSize: '0.85rem',
-            }}
           >
-            Reset pencarian & filter
+            Reset Pencarian & Filter
           </button>
         )}
       </div>
     )
   }
 
-  // Kalau datanya ada, tinggal di-render satu per satu lewat TaskItem
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+    <div className="task-list-container">
       {tasks.map((task) => (
         <TaskItem
           key={task.id}

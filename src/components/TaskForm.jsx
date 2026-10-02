@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { PlusIcon, EditIcon, AlertTriangleIcon } from './Icons'
 
 // Modul Form Input & Edit Tugas (Implementasi oleh Ridho Satrio)
 export default function TaskForm({
@@ -50,7 +51,6 @@ export default function TaskForm({
       notes: notes.trim(),
     }
 
-    // Mendukung kedua variasi callback (onSubmitTask maupun onAddTask/onUpdateTask)
     if (onSubmitTask) {
       onSubmitTask(payload)
     } else if (editingTask && onUpdateTask) {
@@ -77,19 +77,35 @@ export default function TaskForm({
   return (
     <div className="surface-card">
       <form onSubmit={handleSubmit} className="task-form">
-        <h2 className="card-title">
-          {editingTask ? '✏️ Edit Tugas' : '➕ Tambah Tugas Baru'}
+        <h2 className="card-heading">
+          {editingTask ? (
+            <>
+              <EditIcon size={18} />
+              Edit Tugas
+            </>
+          ) : (
+            <>
+              <PlusIcon size={18} />
+              Tambah Tugas Baru
+            </>
+          )}
         </h2>
 
-        {error && <div className="error-badge">⚠️ {error}</div>}
+        {error && (
+          <div className="form-error-alert" role="alert">
+            <AlertTriangleIcon size={16} />
+            <span>{error}</span>
+          </div>
+        )}
 
         <div className="form-group">
-          <label htmlFor="title">
-            Judul Tugas <span className="required-star">*</span>
+          <label htmlFor="task-title" className="form-label">
+            Judul Tugas <span className="form-required">*</span>
           </label>
           <input
             type="text"
-            id="title"
+            id="task-title"
+            className="form-input"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Contoh: Laporan Praktikum Web"
@@ -97,12 +113,13 @@ export default function TaskForm({
         </div>
 
         <div className="form-group">
-          <label htmlFor="course">
-            Mata Kuliah <span className="required-star">*</span>
+          <label htmlFor="task-course" className="form-label">
+            Mata Kuliah <span className="form-required">*</span>
           </label>
           <input
             type="text"
-            id="course"
+            id="task-course"
+            className="form-input"
             value={course}
             onChange={(e) => setCourse(e.target.value)}
             placeholder="Contoh: Pemrograman Web"
@@ -110,31 +127,45 @@ export default function TaskForm({
         </div>
 
         <div className="form-group">
-          <label htmlFor="deadline">
-            Tenggat Waktu <span className="required-star">*</span>
+          <label htmlFor="task-deadline" className="form-label">
+            Tenggat Waktu <span className="form-required">*</span>
           </label>
           <input
             type="datetime-local"
-            id="deadline"
+            id="task-deadline"
+            className="form-input"
             value={deadline}
             onChange={(e) => setDeadline(e.target.value)}
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="notes">Catatan Tambahan (Opsional)</label>
+          <label htmlFor="task-notes" className="form-label">
+            Catatan Tambahan (Opsional)
+          </label>
           <textarea
-            id="notes"
+            id="task-notes"
+            className="form-textarea"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder="Catatan khusus atau instruksi pengerjaan..."
+            placeholder="Catatan khusus, referensi link, dll..."
             rows="3"
           />
         </div>
 
         <div className="form-actions">
           <button type="submit" className="btn-primary">
-            {editingTask ? 'Simpan Perubahan' : 'Tambah Tugas'}
+            {editingTask ? (
+              <>
+                <EditIcon size={16} />
+                Simpan Perubahan
+              </>
+            ) : (
+              <>
+                <PlusIcon size={16} />
+                Tambah Tugas
+              </>
+            )}
           </button>
 
           {editingTask && (

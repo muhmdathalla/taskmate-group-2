@@ -1,92 +1,63 @@
 import React from 'react'
+import { SearchIcon, CloseIcon } from './Icons'
 
-// Halo Fani! Ini komponen buat search bar sama filter status tugas yaa.
-//
-// Props dari App.jsx:
-// - searchQuery         : teks yg lagi diketik user buat nyari judul
-// - onSearchChange      : fungsi biar teks pencarian di App.jsx ikut update
-// - statusFilter        : tab filter aktif ('all', 'pending', atau 'completed')
-// - onStatusFilterChange : fungsi pas tombol filter status diklik
-//
-// Sesuai slide: pencarian judul tugas case-insensitive (ga bedain huruf besar/kecil).
-// Logika filternya udah jalan di App.jsx, di sini tinggal urus UI & interaksinya ya!
-
+// Modul Pencarian & Filter Status (Implementasi oleh Rifani Juniarti)
 export default function FilterBar({
   searchQuery = '',
   onSearchChange,
   statusFilter = 'all',
   onStatusFilterChange,
-  taskCounts = { all: 0, pending: 0, completed: 0 }
+  taskCounts = { all: 0, pending: 0, completed: 0 },
 }) {
+  const tabs = [
+    { key: 'all', label: 'Semua', count: taskCounts.all },
+    { key: 'pending', label: 'Belum Selesai', count: taskCounts.pending },
+    { key: 'completed', label: 'Selesai', count: taskCounts.completed },
+  ]
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.25rem' }}>
+    <div className="filter-bar-wrapper">
       {/* Kolom Pencarian */}
-      <div style={{ position: 'relative' }}>
+      <div className="search-input-container">
+        <span className="search-icon-prefix" aria-hidden="true">
+          <SearchIcon size={16} />
+        </span>
         <input
           type="text"
-          placeholder="🔍 Cari tugas berdasarkan judul..."
+          className="search-input"
+          placeholder="Cari tugas berdasarkan judul..."
           value={searchQuery}
           onChange={(e) => onSearchChange && onSearchChange(e.target.value)}
-          style={{
-            width: '100%',
-            padding: '0.65rem 0.85rem',
-            borderRadius: 'var(--radius-md)',
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-color)',
-            color: 'var(--text-main)',
-          }}
+          aria-label="Cari tugas"
         />
 
         {searchQuery && (
           <button
             type="button"
+            className="search-clear-btn"
             aria-label="Hapus kata kunci pencarian"
             onClick={() => onSearchChange && onSearchChange('')}
-            style={{
-              position: 'absolute',
-              right: '0.4rem',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              width: '1.8rem',
-              height: '1.8rem',
-              borderRadius: 'var(--radius-full)',
-              background: 'var(--bg-surface-soft)',
-              color: 'var(--text-muted)',
-              fontSize: '0.8rem',
-              lineHeight: 1,
-            }}
           >
-            ✕
+            <CloseIcon size={12} />
           </button>
         )}
       </div>
 
       {/* Pilihan Filter Status */}
-      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-        {[
-          { key: 'all', label: `Semua (${taskCounts.all})` },
-          { key: 'pending', label: `Belum Selesai (${taskCounts.pending})` },
-          { key: 'completed', label: `Selesai (${taskCounts.completed})` },
-        ].map((tab) => {
+      <div className="filter-tabs" role="tablist" aria-label="Filter status tugas">
+        {tabs.map((tab) => {
           const isActive = statusFilter === tab.key
           return (
             <button
               key={tab.key}
               type="button"
-              aria-pressed={isActive}
+              role="tab"
+              aria-selected={isActive}
+              className={`filter-tab-btn ${isActive ? 'active' : ''}`}
               onClick={() => onStatusFilterChange && onStatusFilterChange(tab.key)}
-              style={{
-                padding: '0.4rem 0.85rem',
-                borderRadius: 'var(--radius-full)',
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                background: isActive ? 'var(--color-primary)' : 'var(--bg-surface)',
-                color: isActive ? '#ffffff' : 'var(--text-muted)',
-                border: `1px solid ${isActive ? 'var(--color-primary)' : 'var(--border-color)'}`,
-                transition: 'all 0.2s',
-              }}
             >
-              {tab.label}
+              <span>{tab.label}</span>
+              <span className="filter-tab-count">{tab.count}</span>
             </button>
           )
         })}

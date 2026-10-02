@@ -157,7 +157,9 @@ export default function App() {
       <footer className="app-footer">
         <p>
           TaskMate • Dibangun oleh{' '}
-          <span className="footer-team">Kelompok 2 (Muhammad Athalla, Ridho Satrio, Rifani Juniarti)</span>
+          <span className="footer-team-highlight">
+            Kelompok 2 (Muhammad Athalla, Ridho Satrio, Rifani Juniarti)
+          </span>
         </p>
       </footer>
     </div>

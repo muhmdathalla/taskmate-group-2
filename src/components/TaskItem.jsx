@@ -1,25 +1,24 @@
 import React from 'react'
-
-// Halo Fani! Ini komponen buat nampilin satu kartu tugas (item).
-//
-// Props dari TaskList / App.jsx:
-// - task           : object datanya { id, title, course, deadline, notes, completed }
-// - onToggleStatus : buat ubah status selesai / belum selesai
-// - onEdit         : buat nge-trigger mode edit (ngirim data tugas ke form Ridho)
-// - onRequestDelete: buat manggil popup konfirmasi hapus
-//
-// Style-nya udah gw bikin rapi, tapi kalau lu mau adjust card-nya silakan bangett yaa!
-
+import { CheckIcon, CalendarIcon, BookIcon, EditIcon, TrashIcon, ClockIcon } from './Icons'
 
 function formatDeadline(deadline) {
   if (!deadline) return '-'
   const date = new Date(deadline)
   if (Number.isNaN(date.getTime())) return deadline
-  return new Intl.DateTimeFormat('id-ID', {
+
+  const options = {
     day: 'numeric',
     month: 'short',
-    year: 'numeric'
-  }).format(date)
+    year: 'numeric',
+  }
+
+  // Jika menyertakan jam & menit
+  if (String(deadline).includes('T')) {
+    options.hour = '2-digit'
+    options.minute = '2-digit'
+  }
+
+  return new Intl.DateTimeFormat('id-ID', options).format(date)
 }
 
 function isOverdue(task) {
@@ -30,7 +29,7 @@ function isOverdue(task) {
   return date.getTime() < Date.now()
 }
 
-
+// Modul Kartu Tugas (Implementasi oleh Rifani Juniarti)
 export default function TaskItem({
   task,
   onToggleStatus,
@@ -44,136 +43,92 @@ export default function TaskItem({
   const overdue = isOverdue(task)
   const isEditing = editingTask && editingTask.id === task.id
 
+  let cardClasses = 'task-item-card'
+  if (isCompleted) cardClasses += ' is-completed'
+  if (isEditing) cardClasses += ' is-editing'
+  if (overdue) cardClasses += ' is-overdue'
+
   return (
-    <div
-      style={{
-        backgroundColor: 'var(--bg-surface)',
-        border: `1px solid ${isEditing ? 'var(--color-primary)' : overdue ? 'var(--color-danger)' : 'var(--border-color)'}`,
-        borderRadius: 'var(--radius-md)',
-        padding: '1rem',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '0.65rem',
-        transition: 'all 0.2s ease',
-        opacity: isCompleted ? 0.75 : 1,
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.5rem' }}>
-        {/* Tombol Checklist Status */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', flex: 1 }}>
+    <article className={cardClasses}>
+      <div className="task-item-top">
+        <div className="task-item-main">
+          {/* Tombol Checklist Status */}
           <button
             type="button"
+            className={`task-checkbox-btn ${isCompleted ? 'checked' : ''}`}
             onClick={() => onToggleStatus && onToggleStatus(task.id)}
             aria-label={isCompleted ? 'Tandai belum selesai' : 'Tandai selesai'}
-            style={{
-              marginTop: '0.2rem',
-              width: '1.25rem',
-              height: '1.25rem',
-              borderRadius: '4px',
-              border: `2px solid ${isCompleted ? 'var(--color-completed)' : 'var(--border-color)'}`,
-              background: isCompleted ? 'var(--color-completed)' : 'transparent',
-              color: '#ffffff',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '0.75rem',
-              fontWeight: 800,
-              flexShrink: 0,
-            }}
           >
-            {isCompleted ? '✓' : ''}
+            {isCompleted && <CheckIcon size={12} />}
           </button>
 
-          <div>
-            <h3
-              style={{
-                fontSize: '1rem',
-                fontWeight: 600,
-                color: 'var(--text-main)',
-                textDecoration: isCompleted ? 'line-through' : 'none',
-              }}
-            >
+          <div className="task-title-group">
+            <h3 className={`task-title ${isCompleted ? 'strikethrough' : ''}`}>
               {task.title}
             </h3>
-            <span
-              style={{
-                display: 'inline-block',
-                marginTop: '0.25rem',
-                padding: '0.15rem 0.5rem',
-                borderRadius: 'var(--radius-full)',
-                fontSize: '0.75rem',
-                fontWeight: 600,
-                background: 'var(--bg-surface-soft)',
-                color: 'var(--text-muted)',
-                border: '1px solid var(--border-color)',
-              }}
-            >
-              📚 {task.course}
-            </span>
+
+            <div className="task-badges-row">
+              <span className="course-badge">
+                <BookIcon size={12} />
+                <span>{task.course}</span>
+              </span>
+
+              {/* Status Badge */}
+              {isCompleted ? (
+                <span className="status-badge completed">
+                  <CheckIcon size={11} />
+                  Selesai
+                </span>
+              ) : overdue ? (
+                <span className="status-badge overdue">
+                  <ClockIcon size={11} />
+                  Terlambat
+                </span>
+              ) : (
+                <span className="status-badge pending">
+                  <ClockIcon size={11} />
+                  Belum Selesai
+                </span>
+              )}
+            </div>
           </div>
         </div>
-
-        {/* Badge status */}
-        <span
-          style={{
-            padding: '0.2rem 0.6rem',
-            borderRadius: 'var(--radius-full)',
-            fontSize: '0.75rem',
-            fontWeight: 700,
-            backgroundColor: isCompleted ? 'var(--color-completed-soft)' : 'var(--color-pending-soft)',
-            color: isCompleted ? 'var(--color-completed)' : 'var(--color-pending)',
-            flexShrink: 0,
-          }}
-        >
-          {isCompleted ? 'Selesai' : 'Belum Selesai'}
-        </span>
       </div>
 
-      {/* Info deadline & catatan */}
-      <div style={{ fontSize: '0.825rem', color: 'var(--text-muted)' }}>
-        <p style={overdue ? { color: 'var(--color-danger)'} : undefined}>
-          ⏰ Tenggat: {formatDeadline(task.deadline)}
-        </p>
+      {/* Info Tenggat & Catatan */}
+      <div className="task-details">
+        <div className={`task-deadline-info ${overdue ? 'is-overdue' : ''}`}>
+          <CalendarIcon size={13} />
+          <span>Tenggat: {formatDeadline(task.deadline)}</span>
+        </div>
+
         {task.notes && (
-          <p style={{ marginTop: '0.25rem', color: 'var(--text-subtle)', fontStyle: 'italic' }}>
-            📝 {task.notes}
+          <p className="task-notes-info">
+            {task.notes}
           </p>
         )}
       </div>
 
-      {/* Tombol aksi: Edit & Hapus */}
-      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5rem', marginTop: '0.25rem' }}>
+      {/* Tombol Aksi: Edit & Hapus */}
+      <div className="task-actions-row">
         <button
           type="button"
+          className="btn-item-action"
           onClick={() => onEdit && onEdit(task)}
-          style={{
-            padding: '0.35rem 0.65rem',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: '0.8rem',
-            fontWeight: 600,
-            background: 'var(--bg-surface-soft)',
-            color: 'var(--text-main)',
-            border: '1px solid var(--border-color)',
-          }}
         >
-          {isEditing ? '✏️ Sedang Diedit' : '✏️ Edit'}
+          <EditIcon size={13} />
+          <span>{isEditing ? 'Sedang Diedit' : 'Edit'}</span>
         </button>
 
         <button
           type="button"
+          className="btn-item-action delete-btn"
           onClick={() => onRequestDelete && onRequestDelete(task)}
-          style={{
-            padding: '0.35rem 0.65rem',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: '0.8rem',
-            fontWeight: 600,
-            background: 'var(--color-danger-soft)',
-            color: 'var(--color-danger)',
-          }}
         >
-          🗑️ Hapus
+          <TrashIcon size={13} />
+          <span>Hapus</span>
         </button>
       </div>
-    </div>
+    </article>
   )
 }
