@@ -81,6 +81,18 @@ export default function App() {
     setTaskToDelete(null)
   }
 
+  // Reset pencarian dan filter
+  const handleResetFilters = () => {
+    setSearchQuery('')
+    setStatusFilter('all')
+  }
+
+  const taskCounts = {
+    all: tasks.length,
+    pending: tasks.filter((task) => !task.completed).length,
+    completed: tasks.filter((task) => task.completed).length,
+  }
+
   const filteredTasks = useMemo(() => {
     return tasks.filter((task) => {
       const matchQuery = task.title
@@ -118,6 +130,7 @@ export default function App() {
               onSearchChange={setSearchQuery}
               statusFilter={statusFilter}
               onStatusFilterChange={setStatusFilter}
+              taskCounts={taskCounts}
             />
 
             <TaskList
@@ -126,6 +139,9 @@ export default function App() {
               onToggleStatus={handleToggleStatus}
               onEdit={setEditingTask}
               onRequestDelete={setTaskToDelete}
+              searchQuery={searchQuery}
+              onResetFilters={handleResetFilters}
+              editingTask={editingTask}
             />
           </section>
         </div>

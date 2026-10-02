@@ -15,17 +15,25 @@ export default function TaskList({
   onToggleStatus,
   onEdit,
   onRequestDelete,
+  searchQuery = '',
+  onResetFilters,
+  editingTask,
 }) {
   // Empty state 1: Kalau user emang belum pernah nambah tugas sama sekali
   if (totalTasksCount === 0) {
     return (
-      <div className="surface-card" style={{ textAlign: 'center', padding: '3rem 1.5rem' }}>
+      <div className="surface-card" role="status" style={{ textAlign: 'center', padding: '3rem 1.5rem' }}>
         <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>📋</div>
         <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.35rem', color: 'var(--text-main)' }}>
           Belum Ada Tugas Kuliah
         </h3>
         <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-          Yuk catat tugas kuliah pertamamu lewat form di samping!
+          <span className="desktop-text">
+            Yuk catat tugas kuliah pertamamu lewat form di samping!
+          </span>
+          <span className="mobile-text">
+            Yuk catat tugas kuliah pertamamu lewat form di atas!
+          </span>
         </p>
       </div>
     )
@@ -33,15 +41,38 @@ export default function TaskList({
 
   // Empty state 2: Pas user ngetik pencarian atau filter status tapi ga ada yang cocok
   if (tasks.length === 0) {
+    const keyword = searchQuery.trim()
     return (
       <div className="surface-card" style={{ textAlign: 'center', padding: '3rem 1.5rem' }}>
-        <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🔍</div>
+        <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }} aria-hidden="true">🔍</div>
         <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.35rem', color: 'var(--text-main)' }}>
           Tugas Tidak Ditemukan
         </h3>
         <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+          {keyword
+            ? `Tidak ada tugas dengan judul "${keyword}" pada filter ini.`
+            : 'Tidak ada tugas dengan status ini.'}
+            {' '}
           Coba cek kata kunci pencarian atau ubah filter statusnya ya.
         </p>
+
+        {onResetFilters && (
+          <button
+            type="button"
+            onClick={onResetFilters}
+            style={{
+              padding: '0.5rem 1rem',
+              marginTop: '1rem',
+              borderRadius: 'var(--radius-md)',
+              background: 'var(--color-primary)',
+              color: '#ffffff',
+              fontWeight: 600,
+              fontSize: '0.85rem',
+            }}
+          >
+            Reset pencarian & filter
+          </button>
+        )}
       </div>
     )
   }
@@ -56,6 +87,7 @@ export default function TaskList({
           onToggleStatus={onToggleStatus}
           onEdit={onEdit}
           onRequestDelete={onRequestDelete}
+          editingTask={editingTask}
         />
       ))}
     </div>

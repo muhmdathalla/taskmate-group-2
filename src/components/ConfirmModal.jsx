@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 // Halo Fani! Ini popup modal konfirmasi sebelum hapus tugas yaa.
 // Biar user ga sengaja kepencet tombol hapus terus datanya langsung ilang.
@@ -15,6 +15,21 @@ export default function ConfirmModal({
   onConfirm,
   onCancel,
 }) {
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onCancel()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isOpen, onCancel])
+
   if (!isOpen || !task) return null
 
   return (

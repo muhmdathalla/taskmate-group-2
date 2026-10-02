@@ -138,9 +138,25 @@
   align-items: start;
 }
 
+.mobile-text {
+  display: none;
+}
+
+.desktop-text {
+  display: inline;
+}
+
 @media (max-width: 900px) {
   .main-content-layout {
     grid-template-columns: 1fr;
+  }
+
+  .desktop-text {
+    display: none;
+  }
+
+  .mobile-text {
+    display: inline;
   }
 }
 

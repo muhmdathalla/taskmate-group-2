@@ -10,21 +10,45 @@ import React from 'react'
 //
 // Style-nya udah gw bikin rapi, tapi kalau lu mau adjust card-nya silakan bangett yaa!
 
+
+function formatDeadline(deadline) {
+  if (!deadline) return '-'
+  const date = new Date(deadline)
+  if (Number.isNaN(date.getTime())) return deadline
+  return new Intl.DateTimeFormat('id-ID', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  }).format(date)
+}
+
+function isOverdue(task) {
+  if (task.completed || !task.deadline) return false
+  const date = new Date(task.deadline)
+  if (Number.isNaN(date.getTime())) return false
+  if (!String(task.deadline).includes('T')) date.setHours(23, 59, 59, 999)
+  return date.getTime() < Date.now()
+}
+
+
 export default function TaskItem({
   task,
   onToggleStatus,
   onEdit,
   onRequestDelete,
+  editingTask,
 }) {
   if (!task) return null
 
   const isCompleted = Boolean(task.completed)
+  const overdue = isOverdue(task)
+  const isEditing = editingTask && editingTask.id === task.id
 
   return (
     <div
       style={{
         backgroundColor: 'var(--bg-surface)',
-        border: '1px solid var(--border-color)',
+        border: `1px solid ${isEditing ? 'var(--color-primary)' : overdue ? 'var(--color-danger)' : 'var(--border-color)'}`,
         borderRadius: 'var(--radius-md)',
         padding: '1rem',
         display: 'flex',
@@ -107,7 +131,9 @@ export default function TaskItem({
 
       {/* Info deadline & catatan */}
       <div style={{ fontSize: '0.825rem', color: 'var(--text-muted)' }}>
-        <p>⏰ Tenggat: {task.deadline || '-'}</p>
+        <p style={overdue ? { color: 'var(--color-danger)'} : undefined}>
+          ⏰ Tenggat: {formatDeadline(task.deadline)}
+        </p>
         {task.notes && (
           <p style={{ marginTop: '0.25rem', color: 'var(--text-subtle)', fontStyle: 'italic' }}>
             📝 {task.notes}
@@ -130,7 +156,7 @@ export default function TaskItem({
             border: '1px solid var(--border-color)',
           }}
         >
-          ✏️ Edit
+          {isEditing ? '✏️ Sedang Diedit' : '✏️ Edit'}
         </button>
 
         <button
