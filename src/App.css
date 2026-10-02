@@ -1,6 +1,6 @@
 /* ============================================================================
-   TaskMate - Main Application Stylesheet (ITC Front End 2026/2027)
-   Responsive for 360px (mobile) to 1280px (desktop) without horizontal scroll
+   TaskMate - Modern Human-Crafted Stylesheet (ITC Front End 2026/2027)
+   Clean Slate & Emerald Theme • Fully Responsive 360px - 1280px
    ============================================================================ */
 
 .app-wrapper {
@@ -13,17 +13,17 @@
 
 .app-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1140px;
   margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
+  padding: 2.25rem 1.25rem 4rem;
 }
 
 /* ==========================================================================
-   Header Component
+   Header Section
    ========================================================================== */
 .app-header {
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -42,164 +42,216 @@
 }
 
 .brand-logo-icon {
-  width: 2.75rem;
-  height: 2.75rem;
-  background: linear-gradient(135deg, var(--bg-surface-elevated), var(--bg-surface));
-  border: 1px solid var(--brand-primary-border);
-  color: var(--brand-primary);
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: var(--itc-green-light);
+  border: 1px solid var(--itc-green-border);
+  color: var(--itc-green);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: var(--shadow-sm);
   flex-shrink: 0;
 }
 
 .brand-title {
-  font-size: 1.65rem;
+  font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: var(--text-main);
+  color: var(--text-primary);
   line-height: 1.2;
 }
 
 .brand-slogan {
-  color: var(--text-muted);
-  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
   margin-top: 0.15rem;
 }
 
 .header-badge {
   font-size: 0.75rem;
   font-weight: 600;
-  padding: 0.35rem 0.75rem;
+  padding: 0.3rem 0.75rem;
   border-radius: var(--radius-full);
-  background-color: var(--bg-surface-elevated);
-  color: var(--text-muted);
-  border: 1px solid var(--border-default);
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
 }
 
 .header-badge-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--brand-primary);
+  background-color: var(--itc-green);
 }
 
 /* ==========================================================================
-   Summary Dashboard (Ringkasan Statistik)
+   Summary Progress Dashboard (Human-Crafted, No AI Bloat)
    ========================================================================== */
-.summary-grid {
+.summary-dashboard {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summary-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.summary-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.summary-subtitle {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+.summary-percent-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--radius-full);
+  background-color: var(--itc-green-light);
+  border: 1px solid var(--itc-green-border);
+  color: var(--itc-green);
+}
+
+.summary-percent-badge span {
+  font-weight: 800;
+}
+
+.summary-progress-track {
+  width: 100%;
+  height: 6px;
+  background-color: var(--bg-surface-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.summary-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--itc-green), #34d399);
+  border-radius: var(--radius-full);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.summary-metrics-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 0.85rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--border-subtle);
 }
 
-.summary-card {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
-  padding: 1.15rem 1.25rem;
+.metric-chip {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  box-shadow: var(--shadow-card);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.summary-card:hover {
-  border-color: var(--border-focus);
-}
-
-.summary-icon-box {
-  width: 2.75rem;
-  height: 2.75rem;
+  gap: 0.75rem;
+  padding: 0.5rem 0.65rem;
   border-radius: var(--radius-md);
+  background-color: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+}
+
+.metric-chip-icon {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.summary-card.total .summary-icon-box {
-  background-color: var(--bg-surface-elevated);
-  color: var(--text-main);
-  border: 1px solid var(--border-default);
+.metric-chip-icon.total {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
 }
 
-.summary-card.pending .summary-icon-box {
-  background-color: var(--status-pending-subtle);
-  color: var(--status-pending);
-  border: 1px solid var(--status-pending-border);
+.metric-chip-icon.pending {
+  background-color: var(--status-pending-bg);
+  color: var(--status-pending-text);
 }
 
-.summary-card.completed .summary-icon-box {
-  background-color: var(--status-completed-subtle);
-  color: var(--status-completed);
-  border: 1px solid var(--status-completed-border);
+.metric-chip-icon.completed {
+  background-color: var(--status-done-bg);
+  color: var(--status-done-text);
 }
 
-.summary-info {
+.metric-chip-content {
   display: flex;
   flex-direction: column;
 }
 
-.summary-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  margin-bottom: 0.2rem;
+.metric-chip-label {
+  font-size: 0.725rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.1;
 }
 
-.summary-value {
-  font-size: 1.65rem;
+.metric-chip-number {
+  font-size: 1.05rem;
   font-weight: 800;
-  color: var(--text-main);
-  line-height: 1;
+  color: var(--text-primary);
+  line-height: 1.2;
 }
 
 /* ==========================================================================
-   Main Content Layout (Form vs List)
+   Main Grid Layout
    ========================================================================== */
 .main-content-layout {
   display: grid;
-  grid-template-columns: 360px 1fr;
+  grid-template-columns: 350px 1fr;
   gap: 1.75rem;
   align-items: start;
 }
 
-/* Base Surface Card */
 .surface-card {
   background-color: var(--bg-surface);
-  border: 1px solid var(--border-default);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: 1.35rem;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-sm);
 }
 
 .card-heading {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--text-main);
-  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 1.15rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
 /* ==========================================================================
-   Form Component (Modul Ridho)
+   Task Form (Modul Ridho)
    ========================================================================== */
 .task-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.95rem;
 }
 
 .form-group {
@@ -209,65 +261,62 @@
 }
 
 .form-label {
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+  color: var(--text-secondary);
 }
 
 .form-required {
-  color: var(--status-danger);
+  color: var(--status-overdue-text);
 }
 
 .form-input,
 .form-textarea {
   width: 100%;
-  padding: 0.65rem 0.85rem;
+  padding: 0.6rem 0.8rem;
   border-radius: var(--radius-md);
   background-color: var(--bg-surface-elevated);
-  border: 1px solid var(--border-default);
-  color: var(--text-main);
-  font-size: 0.9rem;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.875rem;
   outline: none;
   transition: all 0.2s ease;
 }
 
 .form-input:focus,
 .form-textarea:focus {
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px var(--brand-primary-subtle);
+  border-color: var(--itc-green);
+  box-shadow: 0 0 0 2px var(--itc-green-light);
   background-color: var(--bg-surface-hover);
 }
 
 .form-input::placeholder,
 .form-textarea::placeholder {
-  color: var(--text-dim);
+  color: var(--text-tertiary);
 }
 
 .form-textarea {
   resize: vertical;
-  min-height: 80px;
+  min-height: 75px;
 }
 
 .form-error-alert {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  background-color: var(--status-danger-subtle);
-  border: 1px solid var(--status-danger-border);
-  color: var(--status-danger);
-  padding: 0.6rem 0.85rem;
+  gap: 0.45rem;
+  background-color: var(--status-overdue-bg);
+  border: 1px solid var(--status-overdue-border);
+  color: var(--status-overdue-text);
+  padding: 0.55rem 0.75rem;
   border-radius: var(--radius-md);
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   font-weight: 600;
 }
 
 .form-actions {
   display: flex;
-  gap: 0.65rem;
-  margin-top: 0.25rem;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
 }
 
 .btn-primary {
@@ -275,19 +324,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45rem;
-  padding: 0.75rem 1rem;
-  background-color: var(--brand-primary);
+  gap: 0.4rem;
+  padding: 0.65rem 1rem;
+  background-color: var(--itc-green);
   color: #ffffff;
   font-weight: 700;
   border-radius: var(--radius-md);
-  font-size: 0.9rem;
-  min-height: 44px;
-  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  min-height: 40px;
+  transition: all 0.15s ease;
 }
 
 .btn-primary:hover {
-  background-color: var(--brand-primary-hover);
+  background-color: var(--itc-green-hover);
 }
 
 .btn-primary:active {
@@ -298,31 +347,31 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1rem;
+  padding: 0.65rem 0.95rem;
   background-color: var(--bg-surface-elevated);
-  color: var(--text-muted);
-  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  min-height: 44px;
-  transition: all 0.2s ease;
+  min-height: 40px;
+  transition: all 0.15s ease;
 }
 
 .btn-secondary:hover {
   background-color: var(--bg-surface-hover);
-  color: var(--text-main);
-  border-color: var(--text-dim);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
 }
 
 /* ==========================================================================
-   FilterBar Component (Modul Rifani)
+   Filter Bar (Modul Rifani)
    ========================================================================== */
 .filter-bar-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  margin-bottom: 1.25rem;
+  gap: 0.75rem;
+  margin-bottom: 1.15rem;
 }
 
 .search-input-container {
@@ -335,30 +384,30 @@
   left: 0.85rem;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--text-dim);
+  color: var(--text-tertiary);
   pointer-events: none;
   display: flex;
 }
 
 .search-input {
   width: 100%;
-  padding: 0.65rem 2.25rem 0.65rem 2.4rem;
+  padding: 0.6rem 2.2rem 0.6rem 2.35rem;
   border-radius: var(--radius-md);
   background-color: var(--bg-surface);
-  border: 1px solid var(--border-default);
-  color: var(--text-main);
-  font-size: 0.9rem;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.875rem;
   outline: none;
   transition: all 0.2s ease;
 }
 
 .search-input:focus {
-  border-color: var(--border-focus);
-  box-shadow: 0 0 0 3px var(--brand-primary-subtle);
+  border-color: var(--itc-green);
+  box-shadow: 0 0 0 2px var(--itc-green-light);
 }
 
 .search-input::placeholder {
-  color: var(--text-dim);
+  color: var(--text-tertiary);
 }
 
 .search-clear-btn {
@@ -366,11 +415,11 @@
   right: 0.5rem;
   top: 50%;
   transform: translateY(-50%);
-  width: 1.65rem;
-  height: 1.65rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border-radius: var(--radius-full);
   background-color: var(--bg-surface-elevated);
-  color: var(--text-muted);
+  color: var(--text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -378,86 +427,86 @@
 }
 
 .search-clear-btn:hover {
-  background-color: var(--border-default);
-  color: var(--text-main);
+  background-color: var(--border-strong);
+  color: var(--text-primary);
 }
 
 .filter-tabs {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.45rem;
   flex-wrap: wrap;
 }
 
 .filter-tab-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.45rem 0.95rem;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
   border-radius: var(--radius-full);
-  font-size: 0.825rem;
+  font-size: 0.8rem;
   font-weight: 600;
   background-color: var(--bg-surface);
-  color: var(--text-muted);
-  border: 1px solid var(--border-default);
-  transition: all 0.2s ease;
-  min-height: 36px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.15s ease;
+  min-height: 34px;
 }
 
 .filter-tab-btn:hover {
   background-color: var(--bg-surface-elevated);
-  color: var(--text-main);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
 }
 
 .filter-tab-btn.active {
-  background-color: var(--brand-primary-subtle);
-  color: var(--brand-primary);
-  border-color: var(--brand-primary-border);
+  background-color: var(--itc-green-light);
+  color: var(--itc-green);
+  border-color: var(--itc-green-border);
 }
 
 .filter-tab-count {
-  font-size: 0.725rem;
-  padding: 0.1rem 0.45rem;
+  font-size: 0.7rem;
+  padding: 0.05rem 0.4rem;
   border-radius: var(--radius-full);
   background-color: var(--bg-surface-elevated);
-  color: inherit;
 }
 
 /* ==========================================================================
-   TaskList & TaskItem (Modul Rifani)
+   Task Item Card (Modul Rifani)
    ========================================================================== */
 .task-list-container {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
 
 .task-item-card {
   background-color: var(--bg-surface);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-md);
-  padding: 1.15rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  transition: border-color 0.2s ease, transform 0.15s ease;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .task-item-card:hover {
-  border-color: var(--border-focus);
+  border-color: var(--border-strong);
+  background-color: #141b24;
 }
 
 .task-item-card.is-completed {
-  opacity: 0.8;
-  background-color: rgba(18, 36, 26, 0.6);
+  opacity: 0.75;
 }
 
 .task-item-card.is-editing {
-  border-color: var(--brand-primary);
-  box-shadow: 0 0 0 1px var(--brand-primary);
+  border-color: var(--itc-green);
+  box-shadow: 0 0 0 1px var(--itc-green);
 }
 
 .task-item-card.is-overdue {
-  border-color: var(--status-danger-border);
+  border-color: var(--status-overdue-border);
 }
 
 .task-item-top {
@@ -476,10 +525,10 @@
 }
 
 .task-checkbox-btn {
-  width: 1.35rem;
-  height: 1.35rem;
-  border-radius: 5px;
-  border: 2px solid var(--border-default);
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--radius-xs);
+  border: 1.5px solid var(--border-strong);
   background-color: transparent;
   color: #ffffff;
   display: flex;
@@ -487,16 +536,16 @@
   justify-content: center;
   flex-shrink: 0;
   margin-top: 0.15rem;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .task-checkbox-btn.checked {
-  background-color: var(--brand-primary);
-  border-color: var(--brand-primary);
+  background-color: var(--itc-green);
+  border-color: var(--itc-green);
 }
 
 .task-checkbox-btn:hover:not(.checked) {
-  border-color: var(--brand-primary);
+  border-color: var(--itc-green);
 }
 
 .task-title-group {
@@ -505,16 +554,16 @@
 }
 
 .task-title {
-  font-size: 0.975rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  color: var(--text-main);
-  word-break: break-word;
+  color: var(--text-primary);
   line-height: 1.35;
+  word-break: break-word;
 }
 
 .task-title.strikethrough {
   text-decoration: line-through;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .task-badges-row {
@@ -529,66 +578,66 @@
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding: 0.2rem 0.55rem;
+  padding: 0.15rem 0.5rem;
   border-radius: var(--radius-sm);
-  font-size: 0.75rem;
+  font-size: 0.725rem;
   font-weight: 600;
   background-color: var(--bg-surface-elevated);
-  color: var(--text-muted);
+  color: var(--text-secondary);
   border: 1px solid var(--border-subtle);
 }
 
 .status-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.2rem 0.6rem;
+  gap: 0.25rem;
+  padding: 0.15rem 0.55rem;
   border-radius: var(--radius-full);
-  font-size: 0.725rem;
+  font-size: 0.7rem;
   font-weight: 700;
   flex-shrink: 0;
 }
 
 .status-badge.pending {
-  background-color: var(--status-pending-subtle);
-  color: var(--status-pending);
+  background-color: var(--status-pending-bg);
+  color: var(--status-pending-text);
   border: 1px solid var(--status-pending-border);
 }
 
 .status-badge.completed {
-  background-color: var(--status-completed-subtle);
-  color: var(--status-completed);
-  border: 1px solid var(--status-completed-border);
+  background-color: var(--status-done-bg);
+  color: var(--status-done-text);
+  border: 1px solid var(--status-done-border);
 }
 
 .status-badge.overdue {
-  background-color: var(--status-danger-subtle);
-  color: var(--status-danger);
-  border: 1px solid var(--status-danger-border);
+  background-color: var(--status-overdue-bg);
+  color: var(--status-overdue-text);
+  border: 1px solid var(--status-overdue-border);
 }
 
 .task-details {
-  font-size: 0.825rem;
-  color: var(--text-muted);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
-  padding-left: 2.1rem;
+  gap: 0.3rem;
+  padding-left: 2rem;
 }
 
 .task-deadline-info {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
 }
 
 .task-deadline-info.is-overdue {
-  color: var(--status-danger);
+  color: var(--status-overdue-text);
   font-weight: 600;
 }
 
 .task-notes-info {
-  color: var(--text-dim);
+  color: var(--text-tertiary);
   font-style: italic;
   line-height: 1.4;
   word-break: break-word;
@@ -597,7 +646,7 @@
 .task-actions-row {
   display: flex;
   justify-content: flex-end;
-  gap: 0.5rem;
+  gap: 0.45rem;
   padding-top: 0.35rem;
   border-top: 1px solid var(--border-subtle);
 }
@@ -605,93 +654,94 @@
 .btn-item-action {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.35rem 0.65rem;
+  gap: 0.3rem;
+  padding: 0.3rem 0.6rem;
   border-radius: var(--radius-sm);
-  font-size: 0.775rem;
+  font-size: 0.75rem;
   font-weight: 600;
   background-color: var(--bg-surface-elevated);
-  color: var(--text-muted);
-  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
   transition: all 0.15s ease;
-  min-height: 32px;
+  min-height: 30px;
 }
 
 .btn-item-action:hover {
   background-color: var(--bg-surface-hover);
-  color: var(--text-main);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
 }
 
 .btn-item-action.delete-btn {
-  color: var(--status-danger);
-  background-color: var(--status-danger-subtle);
-  border-color: var(--status-danger-border);
+  color: var(--status-overdue-text);
+  background-color: var(--status-overdue-bg);
+  border-color: var(--status-overdue-border);
 }
 
 .btn-item-action.delete-btn:hover {
-  background-color: rgba(239, 68, 68, 0.25);
+  background-color: rgba(244, 63, 94, 0.2);
   color: #ffffff;
 }
 
 /* ==========================================================================
-   Empty States
+   Empty State
    ========================================================================== */
 .empty-state-card {
   background-color: var(--bg-surface);
-  border: 1px dashed var(--border-default);
+  border: 1px dashed var(--border-strong);
   border-radius: var(--radius-lg);
-  padding: 3rem 1.5rem;
+  padding: 2.75rem 1.5rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
 .empty-state-icon {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 50%;
   background-color: var(--bg-surface-elevated);
-  color: var(--text-dim);
+  color: var(--text-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .empty-state-title {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--text-main);
+  color: var(--text-primary);
 }
 
 .empty-state-desc {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  max-width: 340px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  max-width: 320px;
   line-height: 1.45;
 }
 
 .empty-state-btn {
   margin-top: 0.75rem;
-  padding: 0.55rem 1rem;
+  padding: 0.45rem 0.95rem;
   border-radius: var(--radius-md);
   background-color: var(--bg-surface-elevated);
-  border: 1px solid var(--border-default);
-  color: var(--brand-primary);
+  border: 1px solid var(--border-subtle);
+  color: var(--itc-green);
   font-weight: 600;
-  font-size: 0.825rem;
-  transition: all 0.2s ease;
+  font-size: 0.8rem;
+  transition: all 0.15s ease;
 }
 
 .empty-state-btn:hover {
   background-color: var(--bg-surface-hover);
-  border-color: var(--brand-primary);
+  border-color: var(--itc-green);
 }
 
 /* ==========================================================================
-   Modal Dialog Component (Modul Rifani)
+   Modal Dialog
    ========================================================================== */
 .modal-overlay {
   position: fixed;
@@ -707,88 +757,76 @@
 
 .modal-dialog {
   background-color: var(--bg-surface);
-  border: 1px solid var(--border-default);
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
   width: 100%;
-  max-width: 420px;
-  box-shadow: var(--shadow-elevated);
-  animation: modalPop 0.15s ease-out;
-}
-
-@keyframes modalPop {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  max-width: 400px;
+  box-shadow: var(--shadow-lg);
 }
 
 .modal-header {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
-  margin-bottom: 0.75rem;
-  color: var(--status-danger);
+  gap: 0.6rem;
+  margin-bottom: 0.65rem;
+  color: var(--status-overdue-text);
 }
 
 .modal-header h3 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  color: var(--text-main);
+  color: var(--text-primary);
 }
 
 .modal-desc {
-  font-size: 0.875rem;
-  color: var(--text-muted);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
   line-height: 1.5;
-  margin-bottom: 1.35rem;
+  margin-bottom: 1.25rem;
 }
 
 .modal-desc strong {
-  color: var(--text-main);
+  color: var(--text-primary);
   word-break: break-word;
 }
 
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 0.65rem;
+  gap: 0.6rem;
 }
 
 .btn-danger-confirm {
-  padding: 0.65rem 1.15rem;
+  padding: 0.6rem 1.1rem;
   border-radius: var(--radius-md);
-  background-color: var(--status-danger);
+  background-color: #e11d48;
   color: #ffffff;
   font-weight: 700;
-  font-size: 0.875rem;
-  min-height: 42px;
-  transition: all 0.2s ease;
+  font-size: 0.85rem;
+  min-height: 38px;
+  transition: all 0.15s ease;
 }
 
 .btn-danger-confirm:hover {
-  background-color: var(--status-danger-hover);
+  background-color: #be123c;
 }
 
 /* ==========================================================================
-   Footer Component
+   Footer
    ========================================================================== */
 .app-footer {
   margin-top: auto;
   border-top: 1px solid var(--border-subtle);
   padding: 1.5rem 1rem;
   text-align: center;
-  font-size: 0.825rem;
-  color: var(--text-dim);
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
 }
 
 .footer-team-highlight {
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 /* ==========================================================================
@@ -799,31 +837,26 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-
-  .summary-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
-/* Extra small mobile screens (360px) */
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .app-container {
     padding: 1.25rem 0.75rem 2.5rem;
+  }
+
+  .summary-metrics-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .metric-chip {
+    padding: 0.45rem 0.65rem;
   }
 
   .header-top {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  .summary-grid {
-    grid-template-columns: 1fr;
     gap: 0.65rem;
-  }
-
-  .summary-card {
-    padding: 0.85rem 1rem;
   }
 
   .task-details {
@@ -840,13 +873,5 @@
   .filter-tab-btn {
     white-space: nowrap;
     flex-shrink: 0;
-  }
-
-  .task-item-card {
-    padding: 0.95rem;
-  }
-
-  .btn-item-action {
-    padding: 0.4rem 0.75rem;
   }
 }
