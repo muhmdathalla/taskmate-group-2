@@ -158,7 +158,7 @@ export default function App() {
         <p>
           TaskMate • Dibangun oleh{' '}
           <span className="footer-team-highlight">
-            Kelompok 2 (Muhammad Athalla, Ridho Satrio, Rifani Juniarti)
+            Kelompok 2 (Muhammad Athalla Bagaskara, Ridho Satrio Nugroho, Rifani Juniarti)
           </span>
         </p>
       </footer>
